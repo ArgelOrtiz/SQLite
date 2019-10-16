@@ -5,7 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.Vector;
+import com.tec.aoasqlite.DataBase.Entities.Employee;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SQLHelper extends SQLiteOpenHelper {
@@ -33,25 +36,31 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     }
 
-    public void save(String first_name, String last_name, int phone, int balance){
+    public void save(Employee employee){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO employee VALUES " +
-                "(null, '"+first_name+"', '"+last_name+"',"+phone +", "+balance+")");
+                "(null,"+ employee.getCode()+" ,'"+employee.getFirst_name()+"', '"+employee.getLast_name()+"',"+employee.getPhone() +", "+employee.getBalance()+")");
 
     }
 
-    public Vector<String> find(int code){
-        Vector<String> result   = new Vector<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor   = db.rawQuery("SELECT code,first_name,last_name,phone,balance FROM employee" +
-                "WHERE code = "+code,null);
+    public Employee findEmployee(int code){
 
-        while (cursor.moveToNext()){
-            result.add(cursor.getString(0)+" " +cursor.getString(1)+" "+cursor.getString(2)+""+
-                        cursor.getInt(3)+" "+cursor.getInt(4));
-        }
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor   = db.rawQuery("SELECT * FROM employee " +
+                "WHERE code == "+code+" LIMIT 1",null);
+
+        cursor.moveToNext();
+
+        Employee currentEmployee    = new Employee(
+                cursor.getInt(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getInt(4),
+                cursor.getInt(5)
+        );
 
         cursor.close();
-        return result;
+        return currentEmployee;
     }
 }
