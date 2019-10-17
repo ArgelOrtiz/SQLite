@@ -8,14 +8,14 @@ public class Employee {
     private int code;
     private String first_name;
     private String last_name;
-    private int phone;
+    private long phone;
     private int balance;
 
     public Employee(){
 
     }
 
-    public Employee(int id, int code, String first_name, String last_name, int phone, int balance){
+    public Employee(int id, int code, String first_name, String last_name, long phone, int balance){
         this.id         = id;
         this.code       = code;
         this.first_name = first_name;
@@ -57,11 +57,11 @@ public class Employee {
         this.last_name = last_name;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

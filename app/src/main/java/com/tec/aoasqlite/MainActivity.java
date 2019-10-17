@@ -1,16 +1,21 @@
 package com.tec.aoasqlite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import com.tec.aoasqlite.CRUD.InsertActivity;
 import com.tec.aoasqlite.DataBase.Entities.Employee;
 import com.tec.aoasqlite.DataBase.SQLHelper;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    SQLHelper sqlHelper;
+    RecyclerView employesRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,34 +26,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initComponents(){
-        sqlHelper   = new SQLHelper(getApplicationContext());
+        Button insertButton     = findViewById(R.id.insertMainButton);
+        Button findButton       = findViewById(R.id.findMainButton);
+        Button listButton       = findViewById(R.id.listMainButton);
+        employesRecyclerView    = findViewById(R.id.employesMainRecyclerView);
 
-        test();
-    }
-
-    private void test(){
-        Employee currentEmployee    = new Employee();
-
-        currentEmployee.setCode(001);
-        currentEmployee.setFirst_name("Argel");
-        currentEmployee.setLast_name("Ortiz");
-        currentEmployee.setPhone(477123456);
-        currentEmployee.setBalance(100);
-
-        sqlHelper.save(currentEmployee);
-
-        currentEmployee    = new Employee();
-        currentEmployee.setCode(002);
-        currentEmployee.setFirst_name("Daniel");
-        currentEmployee.setLast_name("Tavarez");
-        currentEmployee.setPhone(477123456);
-        currentEmployee.setBalance(100);
-
-        sqlHelper.save(currentEmployee);
-
-        Employee employeeList = sqlHelper.findEmployee(001);
-
-        System.err.println(employeeList.getFirst_name());
+        insertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent   = new Intent(getApplicationContext(), InsertActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
