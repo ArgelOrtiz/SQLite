@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import com.tec.aoasqlite.DataBase.Entities.Employee;
@@ -17,7 +18,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 
 
     public SQLHelper(Context context) {
-        super(context, "data_base", null,1);
+        super(context, Environment.getExternalStorageDirectory()+"/data_base", null,1);
         // context, name, version
     }
 

@@ -2,6 +2,7 @@ package com.tec.aoasqlite.CRUD;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,11 +21,14 @@ public class UpdateActivity extends AppCompatActivity {
     SQLHelper sqlHelper;
 
     TextInputLayout codeTextTextInputLayout, firstNameTextInputLayout, lastNameTextInputLayout, phoneTextInputLayout, balanceTextInputLayout;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+
+        intent   = getIntent();
 
         initComponents();
     }
@@ -46,6 +50,9 @@ public class UpdateActivity extends AppCompatActivity {
         Button cleanButton                                  = findViewById(R.id.cleanUpdateButton);
         sqlHelper                                           =  new SQLHelper(getApplicationContext());
 
+
+
+        //if ()
         firstNameTextInputLayout.setVisibility(View.GONE);
         lastNameTextInputLayout.setVisibility(View.GONE);
         phoneTextInputLayout.setVisibility(View.GONE);
